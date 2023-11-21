@@ -82,18 +82,18 @@ private:
 
     /* Add Auxiliarly functions, if needed *///
 
-    //Inserts a node directly after head and assigns it value x.
+    // Inserts a node directly after head and assigns it value x.
     void insert_first(int x);
 
-    void insert_last(int x);
+    // Inserts a node directly after node n and assigns it value x.
+    void insert_after(int, Node* n);
 
-    // Inserts a node with x after node n.
-    void insert_after(int x, Node* n);
+    // Inserts a node last in the set and assigns it value x.
+    void insert_last(int x);
 
     // Removes the first node after head.
     void remove_first();
 
+    // Displays a set.
     public: void display() const;
-
-    void insert_at(int x);
 };

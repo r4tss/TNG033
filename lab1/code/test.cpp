@@ -51,6 +51,8 @@ int main() {
         std::vector<int> A2{4, 3, 4, 20, 15};  // note the non-unique values
 
         Set S1{A1};
+        //S1.display();
+        //std::cout << Set::get_count_nodes() << "\n";
         assert(Set::get_count_nodes() == 4);
 
         assert(S1.cardinality() == 3);

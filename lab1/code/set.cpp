@@ -31,26 +31,22 @@ Set::Set(int x) : Set() {
 // Constructor: create a set with elements
 // elements is not sorted and values in it may not be unique
 Set::Set(const std::vector<int>& elements) : Set() {
-    // Finds the lowest element
-    int lowest = elements[0];
-    for(int element : elements)
+    Node* n1;
+    Node* n2;
+    for(int i : elements)
     {
-        if(element < lowest)
-            lowest = element;
-    }
-
-    // Inserts elements such that the highest element that is not a member will be pushed on first.
-    // Resulting in a sorted set where elements go from lowest to highest.
-    for(int i = 0; i < (int)size(elements);i++)
-    {
-        int res = lowest;
-        for(int y : elements)
+        n1 = head;
+        while(n1 != nullptr && !member(i))
         {
-            if(y > res && !member(y))
-                res = y;
+            n2 = n1;
+            n1 = n1->next;
+
+            if(n1 == nullptr || n1->value > i)
+            {
+                insert_after(i, n2);
+                n1 = nullptr;
+            }
         }
-        if(!member(res))
-            insert_first(res);
     }
 }
 
@@ -68,10 +64,12 @@ Set::Set(const Set& rhs) : Set() {
 }
 
 // Assignment operator: use copy-and-swap idiom
-Set& Set::operator=(Set rhs) {
+Set& Set::operator=(Set rhs) { // Call-by-value, copies rhs.
+    // Swaps the head and counter of the copied set.
     std::swap(head, rhs.head);
     std::swap(counter, rhs.counter);
 
+    // Destructor for rhs is called.
     return *this;
 }
 
@@ -239,6 +237,14 @@ void Set::insert_last(int x)
     n->next = new Node{x, nullptr};
     counter++;
 }
+
+// Inserts a node directly after node n and assigns it value x.
+void Set::insert_after(int x, Node* n)
+{
+    n->next = new Node{x, n->next};
+    counter++;
+}
+
 
 // Removes the first node after head.
 void Set::remove_first()
