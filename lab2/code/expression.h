@@ -6,6 +6,8 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
+#include <cmath>
 
 constexpr double Epsilon = 1.0e-5;
 
@@ -17,6 +19,17 @@ class Expression {
         }
 
         // ADD OTHER MEMBER FUNCTIONS
+        friend std::ostream &operator<<(std::ostream &os, const Expression &e)
+        {
+            e.display(os);
+            return os;
+        }
+
+
+
+        virtual void display(std::ostream &os) const = 0;
+
+        virtual Expression *clone() const = 0;
 
         // Return number of existing instances of class Expression
         // Used only for debug purposes

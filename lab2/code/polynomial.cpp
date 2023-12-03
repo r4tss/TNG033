@@ -3,9 +3,6 @@
  * TNG033: Lab 2                                          *
  **********************************************************/
 
-#include <iomanip>
-#include <cmath>
-
 #include "polynomial.h"
 
 Polynomial::Polynomial() {}
@@ -31,6 +28,11 @@ Polynomial::Polynomial(const Polynomial &p) : Expression{}
 Polynomial::~Polynomial()
 {
     coeff = std::vector<double>();
+}
+
+Polynomial *Polynomial::clone() const
+{
+    return new Polynomial{*this};
 }
 
 // Converts polynomial to string
@@ -126,29 +128,22 @@ bool Polynomial::isRoot(const double x) const
     return false;
 }
 
-std::ostream &operator<<(std::ostream &os, const Polynomial &p)
+void Polynomial::display(std::ostream &os) const
 {
     os.precision(2);
 
-    for(int i = 0;i < (int)p.coeff.size();i++)
+    for(int i = 0;i < (int)coeff.size();i++)
     {
-        if(i > 0)
-        {
-            os << std::fixed << std::abs(p.coeff[i]) << " * X^" << i;
-        }
+        if(i == 0)
+            os << std::fixed << coeff[i];
         else
         {
-            os << std::fixed << std::abs(p.coeff[i]);
-        }
-
-        if(i + 1 < (int)p.coeff.size())
-        {
-            if(p.coeff[i + 1] < 0)
+            if(coeff[i] < 0)
                 os << " - ";
             else
                 os << " + ";
+            os << std::fixed << std::abs(coeff[i]) << " * X^" << i;
         }
-    }
 
-    return os;
+    }
 }

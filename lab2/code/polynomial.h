@@ -11,8 +11,6 @@
 #include "expression.h"
 
 class Polynomial : public Expression {
-    // ADD CODE
-
     public:
         Polynomial();
 
@@ -23,6 +21,8 @@ class Polynomial : public Expression {
         Polynomial(const Polynomial &p);
 
         ~Polynomial();
+
+        Polynomial *clone() const override;
 
         double& operator[](int i) { return coeff[i]; };
 
@@ -38,7 +38,7 @@ class Polynomial : public Expression {
 
         Polynomial operator+(const Polynomial &p) const;
 
-        friend std::ostream &operator<<(std::ostream &os, const Polynomial &p);
+        void display(std::ostream &os) const override;
 
         double operator()(const double x) const;
 

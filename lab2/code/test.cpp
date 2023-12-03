@@ -278,75 +278,76 @@ int main() {
 
     assert(Expression::get_count_expressions() == 0);
 
-    ///******************************************************
-    // * TEST PHASE 10                                       *
-    // * Logarithm: constructors                             *
-    // *            operator std::string()                   *
-    // *            set_base                                 *
-    // *            operator<<                               *
-    // *******************************************************/
-    //std::cout
-    //    << "\nTEST PHASE 10: Logarithm - constructors, conversion to std::string, set_base, and "
-    //       "operator<<\n";
+    /******************************************************
+     * TEST PHASE 10                                       *
+     * Logarithm: constructors                             *
+     *            operator std::string()                   *
+     *            set_base                                 *
+     *            operator<<                               *
+     *******************************************************/
+    std::cout
+        << "\nTEST PHASE 10: Logarithm - constructors, conversion to std::string, set_base, and "
+           "operator<<\n";
 
-    //{
-    //    Logarithm l1;  // default constructor
-    //    std::cout << l1 << "\n";
+    {
+        Logarithm l1;  // default constructor
+        std::cout << l1 << "\n";
 
-    //    // Test
-    //    assert(Expression::get_count_expressions() == 2);
-    //    assert(std::string{l1} == std::string{"0.00 + 1.00 * Log_2( 0.00 + 1.00 * X^1 )"});
+        // Test
+        assert(Expression::get_count_expressions() == 2);
+        assert(std::string{l1} == std::string{"0.00 + 1.00 * Log_2( 0.00 + 1.00 * X^1 )"});
 
-    //    std::vector<double> v2{-1, 0, 1};
-    //    Polynomial p2{v2};  // create a polynomial of degree 2
+        std::vector<double> v2{-1, 0, 1};
+        Polynomial p2{v2};  // create a polynomial of degree 2
 
-    //    Logarithm l2{p2, 2, -3, 10};
+        Logarithm l2{p2, 2, -3, 10};
 
-    //    p2[1] = -999.0;  // should not modify  l2
+        p2[1] = -999.0;  // should not modify  l2
 
-    //    // Test
-    //    assert(Expression::get_count_expressions() == 5);
-    //    assert(std::string{l2} ==
-    //           std::string{"2.00 - 3.00 * Log_10( -1.00 + 0.00 * X^1 + 1.00 * X^2 )"});
+        // Test
+        assert(Expression::get_count_expressions() == 5);
+        assert(std::string{l2} ==
+               std::string{"2.00 - 3.00 * Log_10( -1.00 + 0.00 * X^1 + 1.00 * X^2 )"});
 
-    //    Logarithm l3{l1, 1, 2, 10};
+        Logarithm l3{l1, 1, 2, 10};
 
-    //    assert(Expression::get_count_expressions() == 8);
+        assert(Expression::get_count_expressions() == 8);
 
-    //    l1.set_base(3);  // should not modify l3
+        l1.set_base(3);  // should not modify l3
 
-    //    // Test
-    //    assert(std::string{l3} ==
-    //           std::string{"1.00 + 2.00 * Log_10( 0.00 + 1.00 * Log_2( 0.00 + 1.00 * X^1 ) )"});
-    //}
+        // Test
+        assert(std::string{l3} ==
+               std::string{"1.00 + 2.00 * Log_10( 0.00 + 1.00 * Log_2( 0.00 + 1.00 * X^1 ) )"});
+    }
 
-    //assert(Expression::get_count_expressions() == 0);
+    assert(Expression::get_count_expressions() == 0);
 
-    ///*****************************************************
-    // * TEST PHASE 11                                      *
-    // * Logarithm: copy constructor                        *
-    // ******************************************************/
-    //std::cout << "\nTEST PHASE 11: Logarithm - copy constructor\n";
+    /*****************************************************
+     * TEST PHASE 11                                      *
+     * Logarithm: copy constructor                        *
+     ******************************************************/
+    std::cout << "\nTEST PHASE 11: Logarithm - copy constructor\n";
 
-    //{
-    //    Logarithm l1;  // default constructor
-    //    assert(Expression::get_count_expressions() == 2);
+    {
+        Logarithm l1;  // default constructor
+        assert(Expression::get_count_expressions() == 2);
 
-    //    Logarithm* ptr_l2 = new Logarithm{l1, 1, 2, 10};
-    //    assert(Expression::get_count_expressions() == 5);
+        Logarithm* ptr_l2 = new Logarithm{l1, 1, 2, 10};
+        assert(Expression::get_count_expressions() == 5);
 
-    //    Logarithm l3{*ptr_l2};  // copy constructor
-    //    assert(Expression::get_count_expressions() == 8);
+        Logarithm l3{*ptr_l2};  // copy constructor
+        assert(Expression::get_count_expressions() == 8);
 
-    //    delete ptr_l2;  // should not affect l3
-    //    ptr_l2 = nullptr;
+        delete ptr_l2;  // should not affect l3
+        ptr_l2 = nullptr;
 
-    //    // Test
-    //    assert(std::string{l3} ==
-    //           std::string("1.00 + 2.00 * Log_10( 0.00 + 1.00 * Log_2( 0.00 + 1.00 * X^1 ) )"));
-    //}
+        // Test
+        assert(std::string{l3} ==
+               std::string("1.00 + 2.00 * Log_10( 0.00 + 1.00 * Log_2( 0.00 + 1.00 * X^1 ) )"));
+    }
 
-    //assert(Expression::get_count_expressions() == 0);
+        //std::cout << Expression::get_count_expressions() << "\n";
+    assert(Expression::get_count_expressions() == 0);
 
     ///*****************************************************
     // * TEST PHASE 12                                      *
