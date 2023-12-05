@@ -105,25 +105,28 @@ Polynomial operator+(const double lhs, const Polynomial &rhs)
     return res;
 }
 
-double Polynomial::operator()(const double x) const
+double Polynomial::operator()(const double d) const
+{
+	return evaluate(d);
+}
+
+double Polynomial::evaluate(const double d) const
 {
     double res = 0.0;
     int i = 0;
 
     for(double y : coeff)
     {
-        res += y * (std::pow(x,i));
+        res += y * (std::pow(d,i));
         i++;
     }
 
     return res;
 }
 
-bool Polynomial::isRoot(const double x) const
+bool Polynomial::isRoot(const double d) const
 {
-    double d = this->operator()(x);
-
-    if(std::abs(d) < Epsilon)
+    if(this->operator()(d) < Epsilon)
         return true;
     return false;
 }

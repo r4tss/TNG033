@@ -66,3 +66,43 @@ void Logarithm::set_base(int base)
 {
     b = base;
 }
+
+Logarithm &Logarithm::operator=(const Logarithm &l)
+{
+	Logarithm L{l};
+	std::swap(b, L.b);
+	std::swap(c1, L.c1);
+	std::swap(c2, L.c2);
+	std::swap(e, L.e);
+	return *this;
+}
+
+double Logarithm::operator()(const double d) const
+{
+	return evaluate(d);
+}
+
+double Logarithm::evaluate(const double d) const
+{
+		return (c1 + (c2 * (std::log(e->evaluate(d)) / std::log(b))));
+}
+
+bool Logarithm::isRoot(const double d) const
+{
+    if(this->operator()(d) < Epsilon)
+		return true;
+    return false;
+}
+//double Polynomial::operator()(const double x) const
+//{
+//    double res = 0.0;
+//    int i = 0;
+//
+//    for(double y : coeff)
+//    {
+//        res += y * (std::pow(x,i));
+//        i++;
+//    }
+//
+//    return res;
+//}
