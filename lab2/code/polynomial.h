@@ -24,6 +24,8 @@ class Polynomial : public Expression {
 
         Polynomial *clone() const override;
 
+		double evaluate(const double d) const override;
+
         double& operator[](int i) { return coeff[i]; };
 
         const double& operator[](int i) const { return coeff[i]; };
@@ -40,9 +42,9 @@ class Polynomial : public Expression {
 
         void display(std::ostream &os) const override;
 
-        double operator()(const double x) const;
+        double operator()(const double d) const;
 
-        bool isRoot(const double x) const;
+        bool isRoot(const double d) const override;
 
     private:
         std::vector<double> coeff;

@@ -25,11 +25,16 @@ class Expression {
             return os;
         }
 
+		double operator()(const double d) const;
 
+		virtual double evaluate(const double d) const = 0;
 
         virtual void display(std::ostream &os) const = 0;
 
+		virtual bool isRoot(const double d) const = 0;
+
         virtual Expression *clone() const = 0;
+
 
         // Return number of existing instances of class Expression
         // Used only for debug purposes
@@ -48,4 +53,6 @@ class Expression {
 
         // total number of existing expressions -- only to help to detect bugs in the code
         static std::size_t count_expressions;
+
+		Expression &operator=(const Expression &e) = default;
 };
