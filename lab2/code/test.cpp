@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <vector>
 #include <cassert>
+#include <format>
 
 #include "polynomial.h"
 #include "logarithm.h"
@@ -156,7 +157,7 @@ int main() {
 
         // Test
         // This code is not portable.
-        //assert(std::format("{:.2f}", p2(3.3)) == "218.19");
+        assert(std::format("{:.2f}", p2(3.3)) == "218.19");
 
         // This code is a bit more portable
         std::stringstream s;
