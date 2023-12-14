@@ -106,23 +106,20 @@ Polynomial &Polynomial::operator*=(const Polynomial &p)
 {
 	std::map<int, int> result_table;
 
-	auto i1 = coefficients_table.begin();
-	auto i2 = p.coefficients_table.begin();
-
-	while(i2 != p.coefficients_table.end())
+	for(auto i1 = this->coefficients_table.begin();i1 != this->coefficients_table.end();i1++)
 	{
-		result_table[i1->first + i2->first] += i1->second * i2->second;
-		if(result_table[i1->first + i2->first] == 0)
-			result_table.erase(i1->first + i2->first);
-		if(i1 != coefficients_table.end())
-			i1++;
-		else
+		for(auto i2 = p.coefficients_table.begin();i2 != p.coefficients_table.end();i2++)
 		{
-			i2++;
-			i1 = coefficients_table.begin();
+			int key = 0, value = 0;
+			key = i1->first + i2->first;
+			value = result_table[key] + (i1->second * i2->second);
+			//std::cout << "Key: " << key << ", Value: " << value << "\n";
+			result_table[key] = value;
+			if(result_table[key] == 0)
+				result_table.erase(key);
 		}
 	}
-	
+
 	coefficients_table = result_table;
 
 	return *this;
