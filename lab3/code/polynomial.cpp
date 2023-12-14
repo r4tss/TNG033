@@ -22,9 +22,16 @@ Polynomial::Polynomial(int m, int x)
 		coefficients_table.insert({x, m});
 }
 
-// TODO: Make this not accept zero values
-// Not an issue yet as we only get non-zero values
-Polynomial::Polynomial(const std::map<int, int> input_table) : coefficients_table{input_table} {}
+Polynomial::Polynomial(const std::vector<std::pair<int, int>> &in)
+{
+	// std::inserter produces an iterator for the map
+	std::transform(in.begin(), in.end(), std::inserter(coefficients_table, coefficients_table.end()), [] (const std::pair<int, int> &p)
+			{
+			if(p.second != 0)
+				return p;
+			return std::make_pair(0,0); // Useless - create an empty element if value == 0, removes a warning
+			});
+}
 
 Polynomial::~Polynomial()
 {
@@ -46,36 +53,26 @@ Polynomial::operator std::string() const
 	// First is the key and second is the value of each element
 	for(auto i = coefficients_table.begin();i != coefficients_table.end();i++)
 	{
-		if(i == coefficients_table.begin() && i == --coefficients_table.end())
+		if(i == coefficients_table.begin())
+		{
 			if(i->first == 0 && i->second == 0)
 				s << i->second;
 			else
 				s << i->second << "X^" << i->first;
+		}
 		else
 		{
-			if(i->second != 0)
+			if(i != ++coefficients_table.begin() || coefficients_table.begin()->second != 0)
 			{
-				if(i == coefficients_table.begin())
-				{
-					s << i->second << "X^" << i->first;
-				}
+				if(i->second < 0)
+					s << " - ";
 				else
-				{
-					if(i != ++coefficients_table.begin() || coefficients_table.begin()->second != 0)
-					{
-						if(i->second < 0)
-							s << " - ";
-						else
-							s << " + ";
-					}
-
-					s << ((i->second >= 0) ? i->second : -i->second) << "X^" << i->first;
-				}
+					s << " + ";
 			}
+
+			s << ((i->second >= 0) ? i->second : -i->second) << "X^" << i->first;
 		}
 	}
-
-	//std::cout << s.str() << "\n";
 
 	return s.str();
 }
@@ -115,7 +112,6 @@ Polynomial &Polynomial::operator*=(const Polynomial &p)
 
 	while(i2 != p.coefficients_table.end())
 	{
-		//std::cout << "i1: {" << i1->first << ", " << i1->second << "} i2: {" << i2->first << ", " << i2->second << "}\n";
 		result_table[i1->first + i2->first] += i1->second * i2->second;
 		if(result_table[i1->first + i2->first] == 0)
 			result_table.erase(i1->first + i2->first);

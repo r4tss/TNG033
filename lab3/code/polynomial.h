@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 
 class Polynomial
 {
@@ -27,7 +28,7 @@ class Polynomial
 		Polynomial(int m, int x);
 
 		// Constructor from a vector of m and x values
-		Polynomial(const std::map<int, int> input_table);
+		Polynomial(const std::vector<std::pair<int, int>> &in);
 
 		~Polynomial();
 
