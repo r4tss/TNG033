@@ -30,7 +30,7 @@ int main() {
     int n;
     std::cin >> n;
 
-   std::vector<double> terms;
+   	std::vector<double> terms;
 
     for (int i = 0; i < n; ++i) {
         terms.push_back(i);

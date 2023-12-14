@@ -45,7 +45,6 @@ int Polynomial::degree()
 	return (coefficients_table.rbegin())->first;
 }
 
-// TODO: simplify this when zeroes are not stored in the coefficients_table.
 Polynomial::operator std::string() const
 {
 	std::stringstream s;
