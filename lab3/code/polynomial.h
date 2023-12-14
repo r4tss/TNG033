@@ -30,6 +30,7 @@ class Polynomial
 		// Constructor from a vector of m and x values
 		Polynomial(const std::vector<std::pair<int, int>> &in);
 
+		// Destructor
 		~Polynomial();
 
 		/* MEMBER FUNCTIONS */
@@ -48,14 +49,19 @@ class Polynomial
 		// Multiply & increment operator overloading
 		Polynomial &operator*=(const Polynomial &p);
 
+		// Equality operator
 		friend bool operator==(const Polynomial &lhs, const Polynomial &rhs);
 
+		// Add polynomials
 		friend Polynomial operator+(const Polynomial &lhs, const Polynomial &rhs);
 
+		// Subtract polynomials
 		friend Polynomial operator-(const Polynomial &lhs, const Polynomial &rhs);
 
+		// Multiply polynomials
 		friend Polynomial operator*(const Polynomial &lhs, const Polynomial &rhs);
 
+		// Polynomial stream operator
 		friend std::ostream &operator<<(std::ostream &os, const Polynomial &p);
 
 	private:
