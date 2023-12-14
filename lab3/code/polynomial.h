@@ -10,6 +10,8 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <sstream>
+#include <vector>
 
 class Polynomial
 {

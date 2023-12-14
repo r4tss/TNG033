@@ -3,9 +3,6 @@
  * Test polynomial class        *
  *******************************/
 
-#include <iostream>
-#include <string>
-#include <vector>
 #include <cassert>
 
 #include "polynomial.h"
